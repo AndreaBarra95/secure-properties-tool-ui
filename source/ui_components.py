@@ -1,5 +1,5 @@
 import tkinter as tk
-from crypto_operations import *
+from source.crypto_operations import *
 
 def create_ui(root, encrypt_callback, decrypt_callback):
     # Widget frames
