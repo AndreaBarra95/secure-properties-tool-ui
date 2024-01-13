@@ -1,5 +1,5 @@
 import tkinter as tk
-from crypto_operations import *
+from crypto_operations import decrypt_data, encrypt_data, copy_decrypted, copy_encrypted, reset_copy_button
 
 def create_ui(root, encrypt_callback, decrypt_callback):
     # Widget frames
@@ -31,15 +31,16 @@ def create_ui(root, encrypt_callback, decrypt_callback):
     decrypted_password_label.grid(row=3, column=1)
 
     # Buttons to execute encrypt and decrypt actions
-    encrypt_button = tk.Button(root, text="Encrypt", command=encrypt_data)
+    encrypt_button = tk.Button(root, text="Encrypt", command=lambda: encrypt_data(key_entry, password_entry, encrypted_password_label))
     encrypt_button.pack(pady=5)
-    decrypt_button = tk.Button(root, text="Decrypt", command=decrypt_data)
+    decrypt_button = tk.Button(root, text="Decrypt", command=lambda: decrypt_data(key_entry, encrypted_password_label, decrypted_password_label))
     decrypt_button.pack(pady=5)
 
-    # Button to copy encrypted property
-    copy_encrypted_button = tk.Button(input_frame, text="copy", command=copy_encrypted)
+    # Buttons to copy encrypted and decrypted properties
+    copy_encrypted_button = tk.Button(input_frame, text="Copy", command=lambda: copy_encrypted(encrypted_password_label,copy_encrypted_button,root))
     copy_encrypted_button.grid(row=2, column=2, padx=5)
 
-    # Button to copy decrypted property
-    copy_decrypted_button = tk.Button(input_frame, text="copy", command=copy_decrypted)
+    copy_decrypted_button = tk.Button(input_frame, text="Copy", command=lambda: copy_decrypted(decrypted_password_label,copy_decrypted_button,root))
     copy_decrypted_button.grid(row=3, column=2, padx=5)
+
+
