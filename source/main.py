@@ -8,5 +8,5 @@ root.title("Secure Properties Tool - MuleSoft")
 
 create_ui(root, encrypt_data, decrypt_data)
 
-# Esecuzione dell'applicazione
+# Tool execution
 root.mainloop()
