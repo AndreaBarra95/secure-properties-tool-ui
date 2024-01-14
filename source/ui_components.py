@@ -29,18 +29,24 @@ def create_ui(root, encrypt_callback, decrypt_callback):
     decrypted_label.grid(row=3, column=0, sticky="w")
     decrypted_password_label = tk.Label(input_frame, text="", wraplength=200)
     decrypted_password_label.grid(row=3, column=1)
+    
+    # Algorithm choice menu (Setting Blowfish as default)
+    algorithm_choice = tk.StringVar()
+    algorithm_choice.set("Blowfish CBC")  # Opzione predefinita
+    algorithm_menu = tk.OptionMenu(root, algorithm_choice, "Blowfish CBC", "AES CBC")
+    algorithm_menu.pack()
 
     # Buttons to execute encrypt and decrypt actions
-    encrypt_button = tk.Button(root, text="Encrypt", command=lambda: encrypt_data(key_entry, password_entry, encrypted_password_label))
+    encrypt_button = tk.Button(root, text="Encrypt", command=lambda: encrypt_data(key_entry, password_entry, encrypted_password_label,algorithm_choice.get()))
     encrypt_button.pack(pady=5)
-    decrypt_button = tk.Button(root, text="Decrypt", command=lambda: decrypt_data(key_entry, encrypted_password_label, decrypted_password_label))
+    decrypt_button = tk.Button(root, text="Decrypt", command=lambda: decrypt_data(key_entry, encrypted_password_label, decrypted_password_label,algorithm_choice.get()))
     decrypt_button.pack(pady=5)
 
     # Buttons to copy encrypted and decrypted properties
     copy_encrypted_button = tk.Button(input_frame, text="Copy", command=lambda: copy_encrypted(encrypted_password_label,copy_encrypted_button,root))
     copy_encrypted_button.grid(row=2, column=2, padx=5)
 
-    copy_decrypted_button = tk.Button(input_frame, text="Copy", command=lambda: copy_decrypted(decrypted_password_label,copy_decrypted_button,root))
+    copy_decrypted_button = tk.Button(input_frame, text="Copy", command=lambda: copy_decrypted(decrypted_password_label,copy_decrypted_button,root,))
     copy_decrypted_button.grid(row=3, column=2, padx=5)
 
 
